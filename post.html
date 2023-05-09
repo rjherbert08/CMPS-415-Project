@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <title>Posting Data</title>
+   </head>
+
+   <body style = "font-family: arial, sans-serif" 
+      style = "background-color: #E6E6FA">
+	The following needs an action="./users" method=POST 
+	   <br>where the route /post/users is appended to your URI in order t submitt to your app.<p>
+	
+	<form action="/rest/ticket/postTicket" method=POST>
+	ticketID: <input type=text name=ticketID value="ticketID?" ><br>
+	created_at: <input type=text name="created_at" value="time?" ><br>
+	updated_at: <input type=text name="updated_at" value="time?"><br>
+	type: <input type=text name="type" value="type?"><br>
+	subject: <input type=text name="subject" value="subject?"><br>
+	description: <input type=text name="description" value="description?"><br>
+	priority: <input type=text name="priority" value="priority?"><br>
+	status: <input type=text name="status" value="status?"><br>
+	recipient: <input type=text name="recipient" value="recipient?"><br>
+	submitter: <input type=text name="submitter" value="submitter?"><br>
+	assignee_id: <input type=text name="assignee_id" value="assignee_id?"><br>
+	follower_ids: <input type=text name="follower_ids" value="follower_ids?"><br>
+    tags: <<input type=text name="tags" value="tags?"><br>
+	<input type=submit name="submit" value="Send"><p>
+	</form>
+    <button onclick="window.location.href='./menu'">BACK</button>
+
+   </body>
+</html>
