@@ -1,30 +1,110 @@
 <html>
-   <head>
-      <title>Posting Data</title>
-   </head>
+	<body>
+		<body style="font-family: arial, sans-serif; background-color: #E6E6FA">
+			<br>PostTicket Form<p>
+				<style>
+					body {
+						font-family: arial, sans-serif;
+						background-color: #E6E6FA;
+						padding: 20px;
+					}
 
-   <body style = "font-family: arial, sans-serif" 
-      style = "background-color: #E6E6FA">
-	The following needs an action="./users" method=POST 
-	   <br>where the route /post/users is appended to your URI in order t submitt to your app.<p>
-	
-	<form action="/rest/ticket/postTicket" method=POST>
-	ticketID: <input type=text name=ticketID value="ticketID?" ><br>
-	created_at: <input type=text name="created_at" value="time?" ><br>
-	updated_at: <input type=text name="updated_at" value="time?"><br>
-	type: <input type=text name="type" value="type?"><br>
-	subject: <input type=text name="subject" value="subject?"><br>
-	description: <input type=text name="description" value="description?"><br>
-	priority: <input type=text name="priority" value="priority?"><br>
-	status: <input type=text name="status" value="status?"><br>
-	recipient: <input type=text name="recipient" value="recipient?"><br>
-	submitter: <input type=text name="submitter" value="submitter?"><br>
-	assignee_id: <input type=text name="assignee_id" value="assignee_id?"><br>
-	follower_ids: <input type=text name="follower_ids" value="follower_ids?"><br>
-    tags: <<input type=text name="tags" value="tags?"><br>
-	<input type=submit name="submit" value="Send"><p>
-	</form>
-    <button onclick="window.location.href='./menu'">BACK</button>
+					form {
+						max-width: 400px;
+						margin: 0 auto;
+						background-color: #FFFFFF;
+						padding: 20px;
+						border-radius: 5px;
+					}
 
-   </body>
+					input[type="text"] {
+						width: 100%;
+						padding: 10px;
+						margin-bottom: 10px;
+						border: 1px solid #CCCCCC;
+						border-radius: 3px;
+					}
+
+					input[type="submit"] {
+						width: 100%;
+						padding: 10px;
+						background-color: #4CAF50;
+						color: #FFFFFF;
+						border: none;
+						border-radius: 3px;
+						cursor: pointer;
+					}
+
+					button[type="submit"] {
+						width: 100%;
+						padding: 10px;
+						background-color: #FFC629;
+						color: #FFFFFF;
+						border: none;
+						border-radius: 3px;
+						cursor: pointer;
+					}
+
+					input[type="submit"]:hover {
+						background-color: #45a049;
+					}
+
+					h1 {
+						text-align: center;
+					}
+
+					p {
+						margin-top: 0;
+					}
+				</style>
+
+			<form id="ticketForm">
+				ID: <input type="text" name="id" id="id"><br>
+				created_at: <input type="text" name="created_at" id="created_at"><br>
+				updated_at: <input type="text" name="updated_at" id="updated_at"><br>
+				type: <input type="text" name="type" id="type"><br>
+				subject: <input type="text" name="subject" id="subject"><br>
+				description: <input type="text" name="description" id="description"><br>
+				priority: <input type="text" name="priority" id="priority"><br>
+				status: <input type="text" name="status" id="status"><br>
+				recipient: <input type="text" name="recipient" id="recipient"><br>
+				submitter: <input type="text" name="submitter" id="submitter"><br>
+				assignee_id: <input type="text" name="assignee_id" id="assignee_id"><br>
+				followers_ids: <input type="text" name="followers_ids" id="followers_ids"><br>
+				<input type="submit" name="submit" value="Send">
+				<p>
+					<button type="submit" onclick="window.location.href='./'">BACK</button>
+			</form>
+
+			<script>
+				document.getElementById("ticketForm").addEventListener("submit", async function (event) {
+					event.preventDefault();
+
+					// Convert form data to JSON object
+					const formData = new FormData(event.target);
+					const ticket = {};
+					for (const [key, value] of formData.entries()) {
+						ticket[key] = value;
+					}
+
+					// Send POST request to server with JSON body
+					const response = await fetch("/rest/ticket", {
+						method: "POST",
+						body: JSON.stringify({ body: ticket }),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+
+					// Handle response
+					if (response.ok) {
+						const data = await response.json();
+						console.log("Ticket created successfully:", data);
+					} else {
+						console.error("Failed to create ticket:", response.statusText);
+					}
+				});
+			</script>
+		</body>
+
 </html>

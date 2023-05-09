@@ -2,19 +2,26 @@
   "name": "415-phase",
   "version": "1.0.0",
   "description": "CMPS415 Project",
-  "main": "index.js",
+  "main": "PhaseIII.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node PhaseIII.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ckorpio/415-Phase-2_a_solution"
+    "url": "https://github.com/rjherbert08/415-Phase-3"
   },
   "author": "Robert Herbert",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "axios": "^1.4.0",
     "express": "^4.18.2",
-    "mongodb": "^5.3.0"
+    "express-xml-bodyparser": "^0.3.0",
+    "js2xmlparser": "^5.0.0",
+    "mongodb": "^5.4.0",
+    "node-fetch": "^3.3.1",
+    "render": "^0.1.4",
+    "request": "^2.88.2",
+    "xml2js": "^0.5.0"
   },
   "engines": {
     "node": ">=14"
