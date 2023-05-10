@@ -105,8 +105,8 @@
 
 				// Send PUT request to server with JSON body
 				const response = await fetch(`/rest/ticket/${ticket.id}`, {
-					method: "PUT",
-					body: JSON.stringify(ticket), // send the JSON object directly
+					//method: "PUT",
+					body: JSON.stringify(ticket),
 					headers: {
 						"Content-Type": "application/json"
 					}
