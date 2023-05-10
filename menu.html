@@ -2,21 +2,56 @@
    <head>
       <title>Form Menu</title>
       <style>
+         body {
+            font-family: arial, sans-serif;
+            background-color: #b6b6bd;
+            padding: 20px;
+         }
+
+         .container {
+            text-align: center;
+            max-width: 500px;
+            margin-top: 75px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+         }
+
          button {
             background-color: #4CAF50;
-            padding: auto;
             color: white;
-            text-align: center;
-            display: inline-block;
-            font-size: medium;
-            margin: auto;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+         }
+
+         button:hover {
+            background-color: #3E8E41;
+         }
+
+         button:focus {
+            outline: none;
          }
       </style>
    </head>
 
    <body>
-   <button onclick="window.location.href='./postform'">POST</button>
-   <button onclick="window.location.href='./putform'">PUT</button>
-   <button onclick="window.location.href='./getform'">GET</button>
+      <div class="container">
+         <h1>Form Menu</h1>
+         <p>Please select an action:</p>
+         <div>
+            <button onclick="window.location.href='/postform'">Create</button>
+            <button onclick="window.location.href='/putform'">Update</button>
+            <button onclick="window.location.href='/rest/list/'">All Tickets</button>
+            <!-- <button onclick="window.location.href='/searchform'">Search by Ticket ID</button>
+            <button onclick="window.location.href='/deleteform'">Delete by Ticket ID</button> -->
+         </div>
+      </div>
    </body>
 </html>

@@ -5,19 +5,21 @@
 	<style>
 		body {
 			font-family: arial, sans-serif;
-			background-color: #E6E6FA;
+			background-color: #b6b6bd;
 			padding: 20px;
 		}
 
 		form {
-			max-width: 400px;
+			max-width: 500px;
 			margin: 0 auto;
 			background-color: #FFFFFF;
-			padding: 5px;
+			padding: 20px;
 			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 		}
 
 		input[type="text"] {
+			font-family: Arial, sans-serif;
 			width: 100%;
 			padding: 10px;
 			margin-bottom: 10px;
@@ -31,7 +33,6 @@
 			background-color: #4CAF50;
 			color: #FFFFFF;
 			border: none;
-			border-radius: 3px;
 			cursor: pointer;
 		}
 		button[type="submit"] {
@@ -42,6 +43,13 @@
 			border: none;
 			border-radius: 3px;
 			cursor: pointer;
+			font-family: Arial, sans-serif;
+			margin-top: 10px;
+			display: inline-block;
+			padding: 10px 20px;
+			text-decoration: none;
+			text-align: center;
+			transition: background-color 0.3s ease;
 		}
 
 
@@ -51,35 +59,40 @@
 
 		h1 {
 			text-align: center;
+			font-family: Arial, sans-serif;
+			font-size: 32px;
+			color: #4CAF50;
+			margin-top: 0;
 		}
 
 		p {
 			margin-top: 0;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			color: #333333;
 		}
 	</style>
 
 	<body style = "font-family: arial, sans-serif" 
     	style = "background-color: #E6E6FA">
-			The following needs an action="./users" method=POST 
-				<br>where the route /post/users is appended to your URI in order t submitt to your app.<p>
-	
 			<form action="/rest/ticket/postTicket" method=POST>
-			ticketID: <input type=text name=ticketID value="ticketID?" ><br>
-			created_at: <input type=text name="created_at" value="time?" ><br>
-			updated_at: <input type=text name="updated_at" value="time?"><br>
-			type: <input type=text name="type" value="type?"><br>
-			subject: <input type=text name="subject" value="subject?"><br>
-			description: <input type=text name="description" value="description?"><br>
-			priority: <input type=text name="priority" value="priority?"><br>
-			status: <input type=text name="status" value="status?"><br>
-			recipient: <input type=text name="recipient" value="recipient?"><br>
-			submitter: <input type=text name="submitter" value="submitter?"><br>
-			assignee_id: <input type=text name="assignee_id" value="assignee_id?"><br>
-			follower_ids: <input type=text name="follower_ids" value="follower_ids?"><br>
-			tags: <input type=text name="tags" value="tags?"><br>
-			<input type=submit name="submit" value="Send"><p>
+			ID: <input type=text name=ID placeholder="5485" id="id" ><br>
+			created_at: <input type=text name="created_at" placeholder="2020-06-12T10:32:21z" id="created_at"><br>
+			updated_at: <input type=text name="updated_at" placeholder="2023-05-08T10:32:21z" id="updated_at"><br>
+			type: <input type=text name="type" placeholder="type" id="type"><br>
+			subject: <input type=text name="subject" placeholder="subject" id="subject"><br>
+			description: <input type=text name="description" placeholder="description" id="description"><br>
+			priority: <input type=text name="priority" placeholder="Low/Medium/High" id="priority"><br>
+			status: <input type=text name="status" placeholder="Open/Close" id="status"><br>
+			recipient: <input type=text name="recipient" placeholder="recipient email" id="recipient"><br>
+			submitter: <input type=text name="submitter" placeholder="submitter email" id="submitter"><br>
+			assignee_id: <input type=text name="assignee_id" placeholder="assignee id" id="assignee_id"><br>
+			follower_ids: <input type=text name="follower_ids" placeholder="follower ids" id="follower_ids"><br>
+			tags: <input type=text name="tags" placeholder="tags" id="tags"><br>
+			<input type=submit name="submit" value="Send"><p><br/>
 			</form>
-		<button onclick="window.location.href='./menu'">BACK</button>
+			<button onclick="window.location.href='/'">BACK</button>
+		
 
 		<script>
 			document.getElementById("ticketForm").addEventListener("submit", async function(event) {

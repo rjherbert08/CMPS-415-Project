@@ -1,12 +1,28 @@
-const { MongoClient } = require("mongodb");
-
-// Connection to the mongodb
-const uri = "mongodb+srv://robert_herbert:Passw0rd123@cluster0.c9mxcr3.mongodb.net/?retryWrites=true&w=majority";
-
+const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const app = express();
 const port = 3000;
-var fs = require("fs");
+const fs = require('fs');
+const xml2js = require('xml2js');
+const { parseStringPromise } = require('xml2js');
+const axios = require('axios');
+const bodyParser = require('body-parser');
+
+// Connection URL and database name
+const uri = 'mongodb+srv://robert_herbert:Passw0rd123@cluster0.c9mxcr3.mongodb.net/?retryWrites=true&w=majority';
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+
+// Connect to MongoDB
+async function connect() {
+    try {
+        await client.connect();
+        console.log('Connected to MongoDB');
+    } catch (err) {
+        console.error(err);
+    }
+}
+connect();
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
@@ -63,6 +79,21 @@ app.get("/rest/list/", function(req, res){
     run().catch(console.dir);
 });
 
+// SENDS TO SEARCH FORM FILE
+app.get('/searchform', function(req, res) {
+    res.setHeader('Content-Type', 'text/html');
+    fs.readFile('./search.html', 'utf8', (err, contents) => {
+        if (err) {
+            console.log('Form file Read Error', err);
+            res.write('<p>Form file Read Error');
+        } else {
+            console.log('Form loaded\n');
+            res.write(contents + '<br>');
+        }
+        res.end();
+    });
+});
+
 // GET ticket by id
 app.get("/rest/ticket/:ticketId", function(req, res) {
     const client = new MongoClient(uri);
@@ -99,25 +130,42 @@ app.get("/rest/ticket/:ticketId", function(req, res) {
     run().catch(console.dir);
 });
 
+//DELETE BY ID
+app.get('/deleteform', function(req, res) {
+    res.setHeader('Content-Type', 'text/html');
+    fs.readFile('./delete.html', 'utf8', (err, contents) => {
+        if(err) {
+            console.log('Form file Read Error', err);
+            res.write("<p>Form file Read Error");
+        } else {
+            console.log('Form loaded\n');
+            res.write(contents + "<br>");
+        }
+        res.end();
+    });
+});
+
 // A DELETE request
-app.delete("/rest/ticket/:ticketId", function(req, res) {
+app.delete("/rest/ticket/delete", function(req, res) {
     const client = new MongoClient(uri);
     //search key is what we are looking for in the database JSON
     //it needs to match the field "ticketID" and to match the value of that field
-    const searchKey = "ticketID: '" + req.params.ticketId + "'";
-    console.log("Looking for: " + searchKey);
+    //const searchKey = "ticketID: '" + req.params.ticketId + "'";
+    //console.log("Looking for: " + searchKey);
+    const ticketID = req.body.ticketID;
 
     async function run() {
         try {
             const database = client.db("tickets");
             const ticketDb = database.collection("Ticket Collection");
     
-            const query = { ticketID: req.params.ticketId };
+            const query = { ticketID: ticketID };
     
             //find the ticket and delete it
-            const deleteTicket = await ticketDb.deleteOne(query);
+            //const deleteTicket = await ticketDb.deleteOne(query);
+            const result = await ticketDb.deleteOne(query);
             //checking if we deleted the ticket
-            if (deleteTicket.deletedCount === 0) {
+            if (result.deletedCount === 0) {
                 res.status(404).send("Ticket does not exist!");
             } else {
                 console.log(deleteTicket);
