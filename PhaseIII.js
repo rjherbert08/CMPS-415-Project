@@ -2,7 +2,8 @@ const MongoClient = require('mongodb').MongoClient;
 
 // Connection to the mongodb
 const uri = "mongodb+srv://robert_herbert:Passw0rd123@cluster0.c9mxcr3.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+//const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri, { useUnifiedTopology: true}, { useNewUrlParser: true }, { connectTimeoutMS: 30000 }, { keepAlive: 1});
 async function connect() {
     try {
         await client.connect();
