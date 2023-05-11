@@ -75,38 +75,35 @@
 
 	<body style = "font-family: arial, sans-serif" 
     	style = "background-color: #E6E6FA">
-			<form action="/rest/ticket/postTicket" method=POST>
-			ID: <input type=text name=ID placeholder="5485" id="id" ><br>
-			created_at: <input type=text name="created_at" placeholder="2020-06-12T10:32:21z" id="created_at"><br>
-			updated_at: <input type=text name="updated_at" placeholder="2023-05-08T10:32:21z" id="updated_at"><br>
-			type: <input type=text name="type" placeholder="type" id="type"><br>
-			subject: <input type=text name="subject" placeholder="subject" id="subject"><br>
-			description: <input type=text name="description" placeholder="description" id="description"><br>
-			priority: <input type=text name="priority" placeholder="Low/Medium/High" id="priority"><br>
-			status: <input type=text name="status" placeholder="Open/Close" id="status"><br>
-			recipient: <input type=text name="recipient" placeholder="recipient email" id="recipient"><br>
-			submitter: <input type=text name="submitter" placeholder="submitter email" id="submitter"><br>
-			assignee_id: <input type=text name="assignee_id" placeholder="assignee id" id="assignee_id"><br>
-			follower_ids: <input type=text name="follower_ids" placeholder="follower ids" id="follower_ids"><br>
-			tags: <input type=text name="tags" placeholder="tags" id="tags"><br>
-			<input type=submit name="submit" value="Send"><p><br/>
-			</form>
-			<button onclick="window.location.href='/'">BACK</button>
-		
-
+		<form id="ticketForm">
+		id: <input type=text name=id placeholder="Will Auto Generate id" id="id" ><br>
+		created_at: <input type=text name="created_at" placeholder="01-12-2023" id="created_at"><br>
+		updated_at: <input type=text name="updated_at" placeholder="Nothing Required" id="updated_at"><br>
+		type: <input type=text name="type" placeholder="type" id="type"><br>
+		subject: <input type=text name="subject" placeholder="subject" id="subject"><br>
+		description: <input type=text name="description" placeholder="description" id="description"><br>
+		priority: <input type=text name="priority" placeholder="Low/Medium/High" id="priority"><br>
+		status: <input type=text name="status" placeholder="Open/Close" id="status"><br>
+		recipient: <input type=text name="recipient" placeholder="recipient email" id="recipient"><br>
+		submitter: <input type=text name="submitter" placeholder="submitter email" id="submitter"><br>
+		assignee_id: <input type=text name="assignee_id" placeholder="assignee id" id="assignee_id"><br>
+		followers_ids: <input type=text name="followers_ids" placeholder="followers ids" id="followers_ids"><br>
+		<input type=submit name="submit" value="Send"><p><br/>
+		</form>
+		<button onclick="window.location.href='/'">BACK</button>
 		<script>
 			document.getElementById("ticketForm").addEventListener("submit", async function(event) {
 				event.preventDefault();
 
-			   	// Convert form data to JSON object
+			   	// Convert to JSON object
 				const formData = new FormData(event.target);
 				const ticket = {};
 				for (const [key, value] of formData.entries()) {
 					ticket[key] = value;
 				}
 
-			// Send POST request to server with JSON body
-				const response = await fetch("/rest/ticket", {
+				// Send POST request
+				const response = await fetch("/rest/ticket/postTicket", {
 					method: "POST",
 					body: JSON.stringify({ body: ticket }),
 					headers: {
@@ -114,7 +111,7 @@
 					}
 				});
 
-				// Handle response
+				// Response
 				if (response.ok) {
 					const data = await response.json();
 					console.log("Ticket created successfully:", data);
@@ -123,6 +120,5 @@
 				}
 			});
 		</script>
-
 	</body>
 </html>

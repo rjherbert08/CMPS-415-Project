@@ -37,8 +37,7 @@ app.get("/rest/list/", function(req, res){
 
     async function run() {
         try {
-            const database = client.db("tickets");
-            const ticketDb = database.collection("Ticket Collection");
+            const ticketDb = client.db('FinalProject').collection('Phase3');
         
             const query = {}; //this means that all tickets are selected
         
@@ -73,8 +72,7 @@ app.get("/rest/ticket/:ticketId", function(req, res) {
 
     async function run() {
         try {
-            const database = client.db("tickets");
-            const ticketDb = database.collection("Ticket Collection");
+            const ticketDb = client.db('FinalProject').collection('Phase3');
     
             const query = { ticketID: req.params.ticketId };
     
@@ -109,8 +107,7 @@ app.delete("/rest/ticket/:ticketId", function(req, res) {
 
     async function run() {
         try {
-            const database = client.db("tickets");
-            const ticketDb = database.collection("Ticket Collection");
+            const ticketDb = client.db('FinalProject').collection('Phase3');
     
             const query = { ticketID: req.params.ticketId };
     
@@ -154,8 +151,7 @@ app.post("/rest/ticket/postTicket", function(req, res) {
 
     async function run() {
         try {
-            const database = client.db("tickets");
-            const ticketDb = database.collection("Ticket Collection");
+            const ticketDb = client.db('FinalProject').collection('Phase3');
 
             const ticketID = req.body.ticketID;
             const created_at = req.body.created_at;
@@ -205,7 +201,7 @@ app.post("/rest/ticket/postTicket", function(req, res) {
 });
 
 // A PUT request
-app.get('/putform', function(req, res) {
+app.get('/putform', function(res) {
     res.setHeader('Content-Type', 'text/html');
     fs.readFile('./put.html', 'utf8', (err, contents) => {
         if(err) {
@@ -225,8 +221,7 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
 
     async function run() {
         try {
-            const database = client.db("tickets");
-            const ticketDb = database.collection("Ticket Collection");
+            const ticketDb = client.db('FinalProject').collection('Phase3');
 
             const ticketID = req.body.ticketID;
             const created_at = req.body.created_at;
